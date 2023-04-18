@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhang.dao.TicketMapper">
+    <insert id="insertTicket">
+        insert into ticket (id,ticketName,price,amount)
+        values (#{id},#{ticketName},#{price},#{amount});
+    </insert>
+    <update id="updateTicket" parameterType="Ticket">
+        update ticket set ticketName=#{ticketName},
+                          price=#{price},
+                          amount=#{amount}
+                            where id = #{id}
+
+    </update>
+    <delete id="deleteTicket" parameterType="int">
+        delete from ticket where id = #{id}
+    </delete>
+    <select id="selectTickets" resultType="Ticket">
+        select * from ticket;
+    </select>
+
+    <select id="selectTicketsByName" resultType="Ticket" parameterType="string">
+        select * from ticket where ticketName like #{ticketName};
+    </select>
+
+    <select id="selectTicketByID" parameterType="int" resultType="Ticket">
+        select * from ticket where id = #{id};
+    </select>
+</mapper>

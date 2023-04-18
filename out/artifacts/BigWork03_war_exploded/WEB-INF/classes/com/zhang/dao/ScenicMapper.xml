@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhang.dao.ScenicMapper">
+    <update id="updateScenic">
+        update scenicspot set scenicName=#{scenicName},
+                              location=#{location},
+                              temperature=#{temperature},
+                              humidity=#{humidity},
+                              pm25=#{pm25},
+                              noise=#{noise},
+                              image=#{image}
+                              where scenicID=#{scenicID}
+    </update>
+    <!--查询全部景点-->
+    <select id="selectScenicSpots" resultType="com.zhang.entity.ScenicSpot">
+        select * from scenicspot
+    </select>
+    <!--模糊查询景点-->
+    <select id="selectScenicSpotsByName" resultType="ScenicSpot" parameterType="string">
+        select * from scenicspot where scenicName like #{scenicName};
+    </select>
+</mapper>

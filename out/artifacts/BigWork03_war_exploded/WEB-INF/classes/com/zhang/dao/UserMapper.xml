@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhang.dao.UserMapper">
+    <insert id="insertUser">
+        insert into user(userName,idCard,phone,pwd,image)
+        values (#{userName},#{idCard},#{phone},#{pwd},#{image})
+    </insert>
+    <update id="updateUser">
+        update user set userName=#{userName},
+                        idCard=#{idCard},
+                        phone=#{phone},
+                        pwd=#{pwd} where userID =#{userID}
+
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from user where userID=#{id}
+    </delete>
+    <select id="selectUser" resultType="com.zhang.entity.User">
+        select * from user
+    </select>
+
+    <select id="selectMessage" resultType="Message">
+        select m.id,u.userName,m.time,m.context from message m,user u where m.id=u.userID;
+    </select>
+
+    <select id="loginCheck" resultType="User">
+        select * from user where userName = #{userName} and pwd=#{pwd};
+    </select>
+
+
+</mapper>
+
+
